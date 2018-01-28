@@ -1,0 +1,21 @@
+	{% extends "layout.html" %}
+	{% block body %}
+	{% if session.logged_in %}
+	    <h2>Supprimer un field test :</h2><br/><p>Option non sensible au format des caractères (majuscule/minuscule)</p>
+<dl>
+
+	     <form action="{{ url_for('delete_entry') }}" method="post" class="remove_entry">
+	      <dt>Nom :
+	      <dd><input type="text" name="nom"><br><br/>
+
+             <dt>Type :
+	      <dd><input type="text" name="prenom"><br><br/>
+
+	      <dt><input type=submit value="Supprimer un field">
+	       </dl>
+	    </form> 
+	
+	  {% else %}
+	  	<h2>Veuillez vous identifier pour accéder au panel de gestion.</h2>
+	  {% endif %}
+	{% endblock %}

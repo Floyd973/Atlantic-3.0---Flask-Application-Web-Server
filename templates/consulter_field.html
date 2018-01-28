@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block body %}
+
+  {% if session.logged_in %}
+
+  <h2>Consulter la fiche d'un field test :</h2><br/><p>Option non sensible au format des caractères (majuscule/minuscule)</p>
+
+
+    <form action="{{ url_for('consulter2') }}" method="post">
+    <dl>
+      <dt>Nom du field test :
+      <dd><input type="text" name="nom_field"><br><br/>
+              <dt>Type du field test :
+      <dd><input type="text" name="type_field"><br><br/>
+      <dt><input type=submit value="Consulter">
+
+    </dl>
+    </form>
+
+
+
+
+
+  {% else%}
+    <h2>Veuillez vous identifier pour accéder au panel de gestion.</h2>
+  {% endif %}
+{% endblock %}

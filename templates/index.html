@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block body %}
+	{% if session.logged_in %}
+		<h2 align="center">Bienvenue sur le site de gestion des fields test d'Atlantic Industrie</h2><br/>
+		<h3>Que souhaitez-vous faire ?</h3>
+		
+		<!-- CONSULTER BASE DE DONNEES ELEVES -->
+		<form action="{{ url_for('show_entries') }}">
+    		<input type="submit" value="Consulter la liste des fields" />
+    	</form> <br/>
+		<!-- AJOUTER UN ELEVE -->
+		<form action="{{ url_for('ajouter_field') }}">
+    		<input type="submit" value="Ajouter un field" />
+    	</form> <br/>
+		<!-- SUPPRIMER UN ELEVE -->
+		<form action="{{ url_for('supprimer_field') }}">
+    		<input type="submit" value="Supprimer un field" />
+    	</form> <br/>
+		<!-- CONSULTER LA FICHE D'UN ELEVE -->
+    	<form action="{{ url_for('consulter_field') }}">
+    		<input type="submit" value="Consulter la fiche d'un field test" />
+    	</form>
+
+	{% else %}
+		<h2 align="center">Veuillez vous identifier pour accéder au panel de gestion.</h2>
+		<br>
+	{% endif %}
+{% endblock %}

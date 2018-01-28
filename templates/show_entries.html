@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block body %}
+
+  {% if session.logged_in %}
+
+  <h2>Fields test inscrits </h2>
+  <br>
+  <p style="display: inline;">Trier par site :
+  <form style="display: inline;" action="{{ url_for('show_entries_triees') }}" method=post>
+    <SELECT name=site size=1>
+      <option selected value="None"> --- </option>
+      <OPTION value="La Roche-Sur-Yon">La Roche-Sur-Yon</OPTION>
+      <OPTION value="Site 2">Site 2</OPTION>
+      <OPTION value="Site 3">Site 3</OPTION>
+    </SELECT>
+    <input type=submit value="Trier">
+  </form>
+  </p>
+  <ul class=entries>
+<table style="width: 100%">
+  <tr>
+    <th>Nom</th>
+      <th>Type</th>
+    <th>Date de début</th>
+    <th>Coordonnées</th>
+    <th>Filière</th>
+    <th>Site</th>
+    <th>Supprimer</th>
+  </tr>
+
+  {% for entry in entries %}
+  <tr>
+    <td><em>{{ entry.nom }}</em></td>
+    <td>{{ entry.type|safe }}</td>
+    <td>{{ entry.date_debut|safe }}</td>
+    <td>{{ '0'+entry.coordonnees|safe }}</td>
+    <td>{{ entry.filiere|safe }}</td>
+    <td>{{ entry.site|safe }}</td>
+    <td><form action="{{ url_for('delete_field',nom=entry.nom,type=entry.type) }}" method="post"><input type="submit" value="X"></form></td>
+  </tr>
+
+
+  {% else %}
+    <li><em>Il n'y a aucun field test inscrit actuellement.</em>
+
+  {% endfor %}
+  </table>
+  </ul>
+  {% else%}
+    <h2>Veuillez vous identifier pour accéder au panel de gestion.</h2>
+  {% endif %}
+{% endblock %}

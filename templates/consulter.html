@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block body %}
+
+  {% if session.logged_in %}
+
+  <h1 align="center">- Fiche field test -</h1><br/>
+
+  {% for entry in entries %}
+  <div style="position:relative;display: inline-block;width:100%;border-style: solid;border-width: 3px;border-color: #377ba8;border-radius: 20px;">
+  <h2 style="color:#377ba8;text-align: center;text-decoration: underline;">{{ entry.nom }} {{ entry.type|safe }} </h2>
+  <h3 style="color:#377ba8;"> Informations générales</h3>
+  <p>
+     Date de début : {{ entry.date_debut|safe}}<br/>
+     Coordonnées : {{ '0'+entry.coordonnees|safe }}<br/>
+     Site : {{ entry.site|safe }}<br/>
+     Filière : {{ entry.filiere|safe }}
+  </p>
+  <h3 style="color:#377ba8;"> Résultats obtenus</h2>
+  <p>
+     Type de configuration : {{ entry.data_immutable|safe}}<br/>
+  </p>
+
+    {% endfor %}
+
+
+  <h3 style="color:#377ba8;"> Fichiers log</h2>
+    <table style="width: 100%">
+        <tr>
+            <th>Nom</th>
+            <th>Date</th>
+            <th>Contenu</th>
+        </tr>
+
+    {% for entries2 in entries2 %}
+
+<tr>
+	<td> {{ entries2.nom|safe }}</td>
+    <td>{{ entries2.date|safe }}</td>
+    <td> {{ entries2.logg|safe }}</td>
+
+</tr>
+  </div>
+
+  {% else %}
+    <li><em>Il n'y a aucune donnée field test inscrit actuellement.</em>
+
+  {% endfor %}
+
+
+  {% else%}
+    <h2>Veuillez vous identifier pour accéder au panel de gestion.</h2>
+  {% endif %}
+{% endblock %}

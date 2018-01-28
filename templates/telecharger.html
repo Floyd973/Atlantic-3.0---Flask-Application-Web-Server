@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block body %}
+    {% for select in select %}
+    <h2>{{ select.nom }}</h2><br/>
+<textarea rows="100" cols="160" name =config>
+
+
+
+     {{ select.data_immutable|safe }}
+     {{ select.data_mutable|safe }}
+
+
+
+</textarea>
+
+    {% endfor %}
+{% endblock %}

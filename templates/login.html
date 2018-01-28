@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>Veuillez vous athentifier.</h2>
+  <br/>
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+  <form action="{{ url_for('login') }}" method=post>
+    <dl>
+      <dt>Identifiant:
+      <dd><input type=text name=username>
+      <dt>Mot de Passe:
+      <dd><input type=password name=password>
+      <br/> <br/>
+      <dd><input type=submit value=Connexion>
+    </dl>
+  </form>
+{% endblock %}

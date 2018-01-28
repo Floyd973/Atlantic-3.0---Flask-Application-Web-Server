@@ -1,0 +1,143 @@
+	{% extends "layout.html" %}
+	{% block body %}
+	{% if session.logged_in %}
+	<h2>{{entriesconfiguration[1]}} {{entriesconfiguration[0]}}</h2><br/>
+	<dl>
+	    <form action="{{ url_for('modificationconfigurationfields',nom=entriesconfiguration[1],type=entriesconfiguration[0]) }}" method=post>
+	      
+	        <dt><strong>Data immutable :</strong>
+            <br/> <textarea rows="8" cols="90" name =immu>
+
+            -----------------------------------------------------------------------------------------------------------------
+            ------ FICHIER DE CONFIGURATION - POSTE AUTONOME D'ACQUISITION -------
+            -----------------------------------------------------------------------------------------------------------------
+
+            </textarea>
+
+	        <dt><strong>Data mutable :
+            <br/> <textarea rows="100" cols="160" name =mut>
+
+                ----------------------------------------------------------------------
+                ---------- Parametre de cyclage ------------
+
+                Version Soft : ;V1.2;
+                Nom de l'essais ;Demo;
+                Periode d'enregistrement ;100000;
+                 Commentaires ;Demo;
+                Activation du Wattmetre;0;
+                Consigne de cyclage;1000;
+
+                ----------------------------------------------------------------------
+                ---------- Etalonnage des sondes ------------
+                Coefficient a et b de correction - valeur_corrigée = A*valeur_mesure + B
+                 (x10000 pour eviter l'utilisation de float avec l'arduino)
+
+                Etalonnage thermocouple  coef A;10000;
+                Etalonnage thermocouple  coef B;0;
+                Etalonnage thermocouple  nbre Moyennage;1;
+                Etalonnage Tension  coef A;10000;
+                Etalonnage Tension  coef B;0;
+                Etalonnage Tension  nbre Moyennage;1;
+
+                ----------------------------------------------------------------------
+                ---------- Configuration des voies ± 10 V isolée ------------
+                etat de la voie (0-1), noms de la voie, unite de la voie,  coef conversion A, coeff conversion B
+                Coefficient a et b de conversion - valeur_utilisée = A*valeur_corrigée + B
+                (x10000 pour eviter l'utilisation de float avec l'arduino)
+
+                Voie Tension n°1;1;AII 1;mV;10000;0;
+                Voie Tension n°2;1;AII 2;mV;10000;0;
+                Voie Tension n°3;1;AII 3;mV;10000;0;
+                Voie Tension n°4;1;AII 4;mV;10000;0;
+                Voie Tension n°5;1;AII 5;mV;10000;0;
+                Voie Tension n°6;1;AII 6;mV;10000;0;
+                Voie Tension n°7;1;AII 7;mV;10000;0;
+                Voie Tension n°8;1;AII 8;mV;10000;0;
+
+                ----------------------------------------------------------------------
+                ---------- Configuration des compteurs d'impulsions ------------
+                etat de la voie (0-1), noms de la voie, unite de la voie, Type de mesure,  coef conversion A, coeff conversion B
+                Coefficient a et b de conversion - valeur_utilisée = A*valeur_corrigée + B
+                (x10000 pour eviter l'utilisation de float avec l'arduino)
+                Type de mesure : 0 = Mesure frequentielle, 1 = Compteur d'impulsiond
+
+                Voie impulsion n°1;0;1;;;0;0;
+                Voie impulsion n°2;0;1;;;0;0;
+
+                ----------------------------------------------------------------------
+                ---------- Configuration des voies de temperatures ------------
+                etat de la voie (0-1), noms de la voie
+
+                Voie thermocouple n°1;1;T'1;
+                Voie thermocouple n°2;1;T'2;
+                Voie thermocouple n°3;1;T'3;
+                Voie thermocouple n°4;1;T'4;
+                Voie thermocouple n°5;1;T'5;
+                Voie thermocouple n°6;1;T'6;
+                Voie thermocouple n°7;1;T'7;
+                Voie thermocouple n°8;1;T'8;
+
+                ----------------------------------------------------------------------
+                ---------- Configuration des calculs automatiques ------------
+                etat du calcul (0-1),nom du calcul, unité du calcul, type de calcul, n° voie de reference,Echelle, activation de V_min. V_min
+                Type de calcul :  0 = Somme des valeurs  - 1 = Intégral temporelle de la valeur
+                n° voie de reference : 0 à 7 voie de Tension, 8 et 9 voie Impulsionnel, 18 Wattmetre
+
+                Calcul automatique n°1;0;;;1;-1;1;0;0;
+                Calcul automatique n°2;0;;;1;-1;1;0;0;
+                Calcul automatique n°3;0;;;1;-1;1;0;0;
+
+                ----------------------------------------------------------------------
+                ---------- Parametrages des Etapes de cyclage ------------
+                   1- Parametree de l'etape
+                     Etat de l'étape (0-1), nom de l'étape, type de consigne, n° voie de reference, type de comparaison, valeur de régulation, time out
+                       Type de consigne : 0 = Valeur de la sonde - 1 = Somme des valeurs de la sonde  - 2= Intégral temporelle de la valeur - 3 =Temporisation
+                       Type de comparaison : 0 = Supérieure à - 1 = Inférieure à
+                   2- Etat des sorties
+                     DO 24V n°1, DO 24V n°2,DO 24v n°3 (ou sortie wattmetre 230V) ,DO 24v n°3 (ou sortie 230V), CS n°1, CS n° 2
+                   3- Sortie pilotée
+                     Etat activation, n° voie de reference, voie régulée,valeur cible, tolerence, increment reg, periode reg, Valeur int Reg
+                       n° voie de reference : 0 à 7 voie de Tension, 8 et 9 voie Impulsionnel
+                       voie régulée : 0= Voie 0-10V pilotée  - 1= DO 24V n° 1 (PWM 8 bits) - 2= DO 24V n° 2 (PWM 8 bits)
+
+                 Activation des cycles :  ;1;
+                Etape n°1
+                 1- Parametres de l'étape ;1;0;3;-1;0;10000;10;
+                 2- Etat des sorties ;0;0;0;0;0;0;
+                 3 - Sortie pilotée ;0;-1;0;0;0;0;0;50;0;100;
+                Etape n°2
+                 1- Parametres de l'étape ;1;1;3;-1;0;50000;600;
+                 2- Etat des sorties ;1;0;0;0;0;0;
+                 3 - Sortie pilotée ;0;-1;0;0;0;0;0;50;0;100;
+                Etape n°3
+                 1- Parametres de l'étape ;1;2;3;-1;0;50000;30;
+                 2- Etat des sorties ;0;1;0;0;0;0;
+                 3 - Sortie pilotée ;0;-1;0;0;0;0;0;50;0;100;
+                Etape n°4
+                 1- Parametres de l'étape ;1;3;3;-1;0;50000;30;
+                 2- Etat des sorties ;0;0;1;0;0;0;
+                 3 - Sortie pilotée ;0;-1;0;0;0;0;0;50;0;100;
+                Etape n°5
+                 1- Parametres de l'étape ;1;4;3;-1;0;50000;30;
+                 2- Etat des sorties ;0;0;0;1;0;0;
+                 3 - Sortie pilotée ;0;-1;0;0;0;0;0;50;0;100;
+                Etape n°6
+                 1- Parametres de l'étape ;1;5;3;-1;0;50000;30;
+                 2- Etat des sorties ;0;0;0;0;1;0;
+                 3 - Sortie pilotée ;0;-1;0;0;0;0;0;50;0;100;
+                Etape n°7
+                 1- Parametres de l'étape ;1;6;3;-1;0;50000;30;
+                 2- Etat des sorties ;0;0;0;0;0;1;
+                 3 - Sortie pilotée ;0;-1;0;0;0;0;0;50;0;100;
+
+            </textarea>
+	        
+
+	        <dd><strong><input type="submit" value="Modifier le configuration"></strong>
+	     
+	    </form>
+ </dl>
+	  {% else %}
+	    <h2>Veuillez vous identifier pour accéder au panel de gestion.</h2>  
+	  {% endif %}
+	  {% endblock %}

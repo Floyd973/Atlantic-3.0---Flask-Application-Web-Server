@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block body %}
+
+{% if session.logged_in %}
+<h2>Configurations des fields test : </h2><br/>
+
+<table style="width: 100%">
+<tr>
+    <th>Nom</th>
+    <th>Type</th>
+    <th>Data immutable</th>
+    <th>Data mutable</th>
+    <th>Modifier les configurations</th>
+    <th>Télécharger la configuration</th>
+</tr>
+ {% for entry2 in entriesconfiguration %}
+<tr>
+	<td> {{ entry2.nom|safe }}</td>
+    <td>{{ entry2.type|safe }}</td>
+    <td> {{ entry2.data_immutable|safe }}</td>
+    <td> {{ entry2.status|safe }}</td>
+    <td><a href ="{{ url_for('modification',nom=entry2.nom,type=entry2.type) }}">Modifier les configurations</td>
+    <td><a class="btn btn-info" href="{{ url_for('telecharger',nom=entry2.nom) }}">telecharger</a></td>
+
+</tr>
+    {% else %}
+    <li><em>Il n'y a pas de field qui correspondent à votre requète.</em>
+    
+  {% endfor %}
+  </table>
+    {% else%}
+    <h2>Veuillez vous identifier pour accéder au panel de gestion.</h2>
+{% endif %}
+{% endblock %}
+
