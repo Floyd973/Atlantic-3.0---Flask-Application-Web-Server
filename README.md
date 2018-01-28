@@ -8,6 +8,40 @@ Réalisateurs :
 - SEALEY Floyd
 
 --------------------------------
+Objectif Général : 
+
+Le Groupe Atlantic développe et commercialise des solutions de confort thermique tant bien
+individuelles que collectives pour le chauffage de l’eau et de l’air, la climatisation et la ventilation
+depuis 40 ans. Après la phase d’innovation où le produit est conçu, une phase
+d’opportunité puis de faisabilité permettent de vérifier qu’un tel produit soit viable pour la
+commercialisation.
+Sur chaque chauffe-eau est monté un boitier appelé le LOG, permettant par exemple de vérifier la quantité d’eau chaude débitée par le
+ballon. Ainsi, le LOG est un boitier qui, à la fois enregistre des données thermodynamiques du chauffe-eau via des capteurs incorporés dans le ballon, 
+et qui régule par la suite les caractéristiques comme le débit pour assurer le bon fonctionnement du produit.
+L’enjeu est de pouvoir dans un premier temps, faire l'acquisition de ces données à l'aide d'un dispositif arduino et dans un deuxième, 
+transmettre des informations (températures, débit et puissance directement prises du ballon d’eau) et (prises du LOG) à distance à l’équipe R&D
+sur un site web. C'est ce dernier volet qui est développé ici.
+
+--------------------------------
+Objectif du site web : 
+
+Une fois toutes les données sur la carte SD, le programme de la carte Arduino MEGA 2560 envoie les
+données du LOG à une heure fixe sur le site internet via requêtes URL. 
+
+--------------------------------
+Comment effectué un test : 
+
+http://127.0.0.1/5000/traitement/?nom=test1&date=test1&logg=test1
+
+Après avoir fait une requête manuellement, on peut consulter ces données via la route /consulter_field et l'ajout 
+au fichier texte file.txt
+
+
+
+--------------------------------
+
+
+
 Comment exécuter l'application en local ? 
 --------------------------------
 
@@ -105,7 +139,7 @@ COUCHE 3 - Base de donnée :
 
 
 -----------------------
-QU'AVONS NOUS REALISE ? 
+QU'A ÉTÉ REALISÉ ? 
 -----------------------
 
 Nous avons entièrement réalisé les méthodes dynamiques de session et de base de donnée de l'application, à savoir : 
